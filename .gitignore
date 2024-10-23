@@ -1,48 +1,112 @@
-# Wordpress - ignore core, configuration, examples, uploads and logs.
-# https://github.com/github/gitignore/blob/main/WordPress.gitignore
+# Operating System files
+.DS_Store
+Thumbs.db
 
-# Core
-#
-# Note: if you want to stage/commit WP core files
-# you can delete this whole section/until Configuration.
-/wp-admin/
-/wp-content/index.php
-/wp-content/languages
-/wp-content/plugins/index.php
-/wp-content/themes/index.php
-/wp-includes/
-/index.php
-/license.txt
-/readme.html
-/wp-*.php
-/xmlrpc.php
+# IDE files
+.idea
+.vscode/*
+project.xml
+project.properties
+.project
+.settings*
+*.sublime-project
+*.sublime-workspace
+.sublimelinterrc
 
-# Configuration
-wp-config.php
+# Grunt
+none
 
-# Example themes
-/wp-content/themes/twenty*/
+# Sass
+.sass-cache/
 
-# Example plugin
-/wp-content/plugins/hello.php
+# Logs
+logs/
 
-# Uploads
-/wp-content/uploads/
+# Eslint
+.eslintcache
+eslint_report.json
 
-# Log files
-*.log
+# Environment files
+wp-cli.local.yml
+yarn-error.log
+npm-debug.log
+.pnpm-debug.log
 
-# htaccess
-/.htaccess
+# Build files
+*.sql
+*.swp
+*.zip
 
-# All plugins
-#
-# Note: If you wish to whitelist plugins,
-# uncomment the next line
-#/wp-content/plugins
+# Built packages
+build/
+build-module/
+build-style/
+build-style.js
+build-types/
+dist/
+oclif.manifest.json
 
-# All themes
-#
-# Note: If you wish to whitelist themes,
-# uncomment the next line
-#/wp-content/themes
+# Project files
+node_modules/
+vendor/
+
+# TypeScript files
+tsconfig.tsbuildinfo
+
+# Node Package Dependencies
+package-lock.json
+
+# wp-env config
+.wp-env.override.json
+
+# Unit tests
+tmp/
+
+# Composer
+vendor/
+bin/composer/**/vendor/
+lib/vendor/
+contributors.md
+contributors.html
+
+# Yarn
+yarn.lock
+
+# Editors
+nbproject/private/
+
+# E2E and API Test Results
+test-results
+.auth/
+
+# Admin Feature config
+plugins/woocommerce/includes/react-admin/feature-config.php
+
+# PHP lint
+phpcs-report.xml
+
+#PHP Unit
+.phpunit.result.cache
+
+# Allure directories
+allure-report
+allure-results
+
+# Code analyzer output and env
+changes.json
+.env
+
+# Build Cache
+.turbo
+.wireit
+
+# Support .gitkeep Files
+!.gitkeep
+
+# default docs manifest
+/manifest.json
+
+# Metrics tests
+/artifacts
+/plugins/*/artifacts
+/tools/*/artifacts
