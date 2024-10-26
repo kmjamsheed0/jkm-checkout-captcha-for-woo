@@ -35,5 +35,34 @@ if (!function_exists('is_woocommerce_active')){
 }
 
 if(is_woocommerce_active()) {
-	
+	if(!class_exists('JKM_Checkout_Captcha_For_Woo')){
+		class JKM_Checkout_Captcha_For_Woo {
+			const TEXT_DOMAIN = 'jkm-checkout-captcha-for-woo';
+
+			public function __construct(){
+				add_action('init', array($this, 'init'));
+			}
+
+			public function init() {
+				define('JKMCCFW_VERSION', '1.0.0');
+				!defined('JKMCCFW_BASE_NAME') && define('JKMCCFW_BASE_NAME', plugin_basename( __FILE__ ));
+				!defined('JKMCCFW_PATH') && define('JKMCCFW_PATH', plugin_dir_path( __FILE__ ));
+				!defined('JKMCCFW_URL') && define('JKMCCFW_URL', plugins_url( '/', __FILE__ ));
+				!defined('JKMCCFW_ASSETS_URL') && define('JKMCCFW_ASSETS_URL', JKMCCFW_URL .'assets/');
+
+				$this->load_plugin_textdomain();
+
+				require_once( JKMCCFW_PATH . 'includes/class-jkmccfw.php' );
+				JKMCCFW::instance();
+			}
+
+			public function load_plugin_textdomain(){
+				$locale = apply_filters('plugin_locale', get_locale(), self::TEXT_DOMAIN);
+
+				load_textdomain(self::TEXT_DOMAIN, WP_LANG_DIR.'/jkm-checkout-captcha-for-woo/'.self::TEXT_DOMAIN.'-'.$locale.'.mo');
+				load_plugin_textdomain(self::TEXT_DOMAIN, false, dirname(JKMCCFW_BASE_NAME) . '/languages/');
+			}
+		}
+	}
+	new JKM_Checkout_Captcha_For_Woo();
 }
