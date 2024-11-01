@@ -35,6 +35,26 @@ if (!function_exists('is_woocommerce_active')){
 }
 
 if(is_woocommerce_active()) {
+
+	/**
+	 * The code that runs during plugin activation.
+	 */
+	function activate_thwec() {
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-jkmccfw-activator.php';
+		JKMCCFW_Activator::activate();
+	}
+	
+	/**
+	 * The code that runs during plugin deactivation.
+	 */
+	function deactivate_thwec() {
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-jkmccfw-deactivator.php';
+		JKMCCFW_Deactivator::deactivate();
+	}
+	
+	register_activation_hook( __FILE__, 'activate_thwec' );
+	register_deactivation_hook( __FILE__, 'deactivate_thwec' );
+	
 	if(!class_exists('JKM_Checkout_Captcha_For_Woo')){
 		class JKM_Checkout_Captcha_For_Woo {
 			const TEXT_DOMAIN = 'jkm-checkout-captcha-for-woo';
