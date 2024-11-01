@@ -74,34 +74,47 @@ if (!class_exists('JKMCCFW_Admin_Settings')) :
             ?>
             <div id="tab-woocommerce" class="tab-content">
             <table class="form-table">
-                <tr valign="top">
+                <tr valign="top" class="<?php echo (!$is_woocommerce_active ? 'jkmccfw-disabled-row' : ''); ?>">
                     <th scope="row"><?php esc_html_e('WooCommerce Login', 'jkm-checkout-captcha-for-woo'); ?></th>
                     <td>
-                        <input type="checkbox" name="jkmccfw_woo_login" 
-                            <?php checked(get_option('jkmccfw_woo_login')); ?> 
-                            <?php echo !$is_woocommerce_active ? 'disabled' : ''; ?>>
+                        <input type="checkbox" name="jkmccfw_woo_login" <?php checked(get_option('jkmccfw_woo_login')); ?>>
                     </td>
                 </tr>
-                <tr valign="top">
+                <tr valign="top" class="<?php echo (!$is_woocommerce_active ? 'jkmccfw-disabled-row' : ''); ?>">
                     <th scope="row"><?php esc_html_e('WooCommerce Register', 'jkm-checkout-captcha-for-woo'); ?></th>
                     <td>
-                        <input type="checkbox" name="jkmccfw_woo_register" 
-                            <?php checked(get_option('jkmccfw_woo_register')); ?>
-                            <?php echo !$is_woocommerce_active ? 'disabled' : ''; ?>>
+                        <input type="checkbox" name="jkmccfw_woo_register" <?php checked(get_option('jkmccfw_woo_register')); ?>>
                     </td>
                 </tr>
-                <tr valign="top">
+                <tr valign="top" class="<?php echo (!$is_woocommerce_active ? 'jkmccfw-disabled-row' : ''); ?>">
                     <th scope="row">
                         <?php esc_html_e('WooCommerce Checkout', 'jkm-checkout-captcha-for-woo'); ?><br/><br/>
                         <?php esc_html_e('Guest Checkout Only', 'jkm-checkout-captcha-for-woo'); ?>
                     </th>
                     <td>
-                        <input type="checkbox" name="jkmccfw_woo_checkout" 
-                            <?php checked(get_option('jkmccfw_woo_checkout')); ?>
-                            <?php echo !$is_woocommerce_active ? 'disabled' : ''; ?>><br/><br/>
-                        <input type="checkbox" name="jkmccfw_guest_only" 
-                            <?php checked(get_option('jkmccfw_guest_only')); ?>
-                            <?php echo !$is_woocommerce_active ? 'disabled' : ''; ?>>
+                        <input type="checkbox" name="jkmccfw_woo_checkout" <?php checked(get_option('jkmccfw_woo_checkout')); ?>><br/><br/>
+                        <input type="checkbox" name="jkmccfw_guest_only" <?php checked(get_option('jkmccfw_guest_only')); ?>>
+                    </td>
+                </tr>
+                <tr valign="top" class="<?php echo (!$is_woocommerce_active ? 'jkmccfw-disabled-row' : ''); ?>">
+                    <th scope="row" style="padding-top: 0px;">
+                        <?php esc_html_e('Widget Location on Checkout', 'jkm-checkout-captcha-for-woo'); ?>
+                    </th>
+                    <td style="padding-top: 0px;">
+                        <select name="rcfwc_woo_checkout_pos" class="jkmccfw-select">
+                            <option value="beforepay" <?php selected(get_option('rcfwc_woo_checkout_pos'), 'beforepay', true); ?>>
+                                <?php esc_html_e('Before Payment', 'jkm-checkout-captcha-for-woo'); ?>
+                            </option>
+                            <option value="afterpay" <?php selected(get_option('rcfwc_woo_checkout_pos'), 'afterpay', true); ?>>
+                                <?php esc_html_e('After Payment', 'jkm-checkout-captcha-for-woo'); ?>
+                            </option>
+                            <option value="beforebilling" <?php selected(get_option('rcfwc_woo_checkout_pos'), 'beforebilling', true); ?>>
+                                <?php esc_html_e('Before Billing', 'jkm-checkout-captcha-for-woo'); ?>
+                            </option>
+                            <option value="afterbilling" <?php selected(get_option('rcfwc_woo_checkout_pos'), 'afterbilling', true); ?>>
+                                <?php esc_html_e('After Billing', 'jkm-checkout-captcha-for-woo'); ?>
+                            </option>
+                        </select>
                     </td>
                 </tr>
                 <?php $this->render_payment_methods_section(); ?>

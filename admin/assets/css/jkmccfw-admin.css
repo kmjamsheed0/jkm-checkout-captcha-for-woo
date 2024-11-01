@@ -7,6 +7,33 @@
     width: 200px;
 }
 
+.jkmccfw-disabled-row {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* select dropdown */
+.jkmccfw-select {
+    width: 100% !important;
+    padding: 6px 12px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 20px !important;
+    background-color: #fff !important;
+    color: #333 !important;
+    font-size: 14px !important;
+    appearance: none !important; /* Remove default browser styling */
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'><path fill='%23333' d='M7 10l5 5 5-5z'/></svg>") !important;
+    background-position: right 10px center !important;
+    background-repeat: no-repeat !important;
+    cursor: pointer !important;
+}
+
+.jkmccfw-select:focus {
+    border-color: #007cba; /* WordPress blue for focus state */
+    outline: none;
+    box-shadow: 0 0 0 1px #007cba;
+}
+
 .jkmccfw-payment-methods-td .jkmccfw-payment-methods__div{
     background-color: #696969;
     border-radius: 20px;
