@@ -35,6 +35,7 @@ class JKMCCFW {
     private function load_dependencies() {
         require_once JKMCCFW_PATH . 'includes/utils/class-jkmccfw-utils.php';
         require_once JKMCCFW_PATH . 'admin/class-jkmccfw-admin.php';
+        require_once JKMCCFW_PATH . 'admin/class-jkmccfw-admin-settings.php';
         require_once JKMCCFW_PATH . 'public/class-jkmccfw-public.php';
     }
 
@@ -42,8 +43,8 @@ class JKMCCFW {
         $admin = new JKMCCFW_Admin();
         add_action( 'admin_init', array($admin, 'jkmccfw_activation_redirect') );
         add_action('admin_menu', array($admin, 'jkmccfw_admin_menu'));
-        add_filter('woocommerce_screen_ids', array($admin, 'add_screen_id'));
         add_filter('plugin_action_links_'.JKMCCFW_BASE_NAME, array($admin, 'plugin_action_links'));
+        add_action( 'admin_enqueue_scripts', array($admin, 'jkmccfw_admin_script_enqueue') );
         // add_action( 'woocommerce_product_options_related', array( $admin, 'jkmccfw_write_panel_tab' ) );
         // add_action( 'woocommerce_process_product_meta', array( $admin, 'jkmccfw_process_extra_product_meta' ), 1, 2 );
     }

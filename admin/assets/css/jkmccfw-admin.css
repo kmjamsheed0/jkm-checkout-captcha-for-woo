@@ -1,0 +1,160 @@
+.nav-tab-wrapper {
+    margin-bottom: 20px;
+}
+
+.form-table th {
+    padding: 20px 10px 20px 0;
+    width: 200px;
+}
+
+.jkmccfw-payment-methods-td .jkmccfw-payment-methods__div{
+    background-color: #696969;
+    border-radius: 20px;
+    margin-bottom: 9px;
+    padding: 15px 10px;
+    line-height: 1.3;
+    vertical-align: middle;
+    width: 50%;
+}
+
+.payment-methods-wrapper {
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    margin-top: 10px;
+}
+
+.payment-methods-wrapper .description {
+    margin-top: 0px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-style: oblique;
+}
+
+.payment-methods-wrapper label {
+    display: block;
+}
+
+.checkbox-controls {
+    margin-bottom: 10px;
+}
+
+.checkbox-controls button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    background: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.checkbox-controls button:hover {
+    background: #f0f0f0;
+}
+
+.jkmccfw-test-form {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+.notice {
+    margin: 15px 0;
+    padding: 10px;
+    border-left: 4px solid #000;
+}
+
+.notice-success {
+    border-color: #46b450;
+    background: #ecf7ed;
+}
+
+.notice-error {
+    border-color: #dc3232;
+    background: #fbeaea;
+}
+
+/* Tooltip Icon */
+.dashicons-info {
+    cursor: pointer;
+    color: #555;
+    position: relative; /* Allow positioning of the tooltip */
+}
+
+/* Tooltip Text */
+.tooltip-text {
+    display: none; /* Hide by default */
+    position: absolute;
+    background: #333;
+    color: #fff;
+    padding: 10px; /* Increased padding for better size */
+    border-radius: 5px;
+    top: 54%;
+    left: 0;
+    transform: translate(5px, -50%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    font-size: 11px;
+    width: 250px;
+    line-height: 1;
+}
+
+/* Show Tooltip on Hover */
+.dashicons-info:hover + .tooltip-text {
+    display: block; /* Show tooltip on hover */
+}
+
+/* Admin test form for reCaptcha response */
+.jkmccfw-admin-form .jkmccfw-admin-form-container {
+    padding: 20px 20px 25px 20px;
+    background: #fff;
+    border-radius: 20px;
+    max-width: 500px;
+    border: 2px solid #d5d5d5;
+}
+
+.jkmccfw-form-title {
+    font-weight: 600;
+    font-size: 19px;
+    margin: 0;
+}
+
+.jkmccfw-info-text {
+    color: #555;
+    font-size: 16px;
+}
+
+.jkmccfw-warning {
+    color: red;
+    font-weight: bold;
+}
+
+.jkmccfw-success-message {
+    font-weight: bold;
+    color: green;
+    margin: -2px 0 -4px 0;
+}
+
+.jkmccfw-error {
+    font-weight: bold;
+    color: red;
+}
+
+.jkmccfw-field-wrapper {
+    margin-left: 0;
+}
+
+.jkmccfw-submit-btn {
+    margin-top: 10px;
+    padding: 7px 10px;
+    background: #1c781c;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    border: 1px solid #176017;
+    border-radius: 4px;
+    cursor: pointer;
+}

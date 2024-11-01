@@ -68,7 +68,8 @@ if(is_woocommerce_active()) {
 				!defined('JKMCCFW_BASE_NAME') && define('JKMCCFW_BASE_NAME', plugin_basename( __FILE__ ));
 				!defined('JKMCCFW_PATH') && define('JKMCCFW_PATH', plugin_dir_path( __FILE__ ));
 				!defined('JKMCCFW_URL') && define('JKMCCFW_URL', plugins_url( '/', __FILE__ ));
-				!defined('JKMCCFW_ASSETS_URL') && define('JKMCCFW_ASSETS_URL', JKMCCFW_URL .'assets/');
+				!defined('JKMCCFW_ADMIN_ASSETS_URL') && define('JKMCCFW_ADMIN_ASSETS_URL', JKMCCFW_URL .'admin/assets/');
+				!defined('JKMCCFW_PUBLIC_ASSETS_URL') && define('JKMCCFW_PUBLIC_ASSETS_URL', JKMCCFW_URL .'public/assets/');
 
 				$this->load_plugin_textdomain();
 
