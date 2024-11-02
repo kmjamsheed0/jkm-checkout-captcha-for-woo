@@ -114,6 +114,12 @@ if (!class_exists('JKMCCFW_Admin_Settings')) :
                             <option value="afterbilling" <?php selected(get_option('jkmccfw_woo_checkout_pos'), 'afterbilling', true); ?>>
                                 <?php esc_html_e('After Billing', 'jkm-checkout-captcha-for-woo'); ?>
                             </option>
+                            <option value="beforeform" <?php selected(get_option('jkmccfw_woo_checkout_pos'), 'beforeform', true); ?>>
+                                <?php esc_html_e('Before Checkout Form', 'jkm-checkout-captcha-for-woo'); ?>
+                            </option>
+                            <option value="afterform" <?php selected(get_option('jkmccfw_woo_checkout_pos'), 'afterform', true); ?>>
+                                <?php esc_html_e('After Checkout Form', 'jkm-checkout-captcha-for-woo'); ?>
+                            </option>
                         </select>
                     </td>
                 </tr>

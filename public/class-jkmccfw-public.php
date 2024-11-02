@@ -230,6 +230,7 @@ if (!class_exists('JKMCCFW_Public')) :
             
             // Apply filter to allow changing the position
             $checkout_position = apply_filters('jkmccfw_checkout_captcha_position_hook', $checkout_position);
+            $checkout_position_hp = apply_filters('jkmccfw_checkout_captcha_position_hook_priority', 9999);
 
             // Set up hooks based on the filtered position
             if (empty($checkout_position) || $checkout_position == "beforepay") {
@@ -240,12 +241,16 @@ if (!class_exists('JKMCCFW_Public')) :
                 add_action('woocommerce_before_checkout_billing_form', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), 10);
             } elseif ($checkout_position == "afterbilling") {
                 add_action('woocommerce_after_checkout_billing_form', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), 10);
-            } elseif ($checkout_position == "beforesubmit") {
-                add_action('woocommerce_review_order_before_submit', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), 10);
+            } elseif ($checkout_position == "beforeform") {
+                add_action('woocommerce_before_checkout_form', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), 10);
+            } elseif ($checkout_position == "afterform") {
+                add_action('woocommerce_after_checkout_form', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), 10);
             } else {
                 // Check if the position is a valid action hook and add the callback
                 if (has_action($checkout_position)) {
-                    add_action($checkout_position, array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), 10);
+                    add_action($checkout_position, array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), $checkout_position_hp);
+                } else {
+                    add_action('woocommerce_review_order_before_payment', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), 10);
                 }
             }
         }
