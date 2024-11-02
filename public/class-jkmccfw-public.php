@@ -166,7 +166,7 @@ if (!class_exists('JKMCCFW_Public')) :
             $skip = false;
 
             if (isset($_POST['payment_method'])) {
-                $chosen_payment_method = sanitize_text_field($_POST['payment_method']);
+                $chosen_payment_method = sanitize_text_field(wp_unslash($_POST['payment_method']));
                 $selected_payment_methods = get_option('jkmccfw_selected_payment_methods', array());
 
                 if (is_array($selected_payment_methods)) {
@@ -195,7 +195,11 @@ if (!class_exists('JKMCCFW_Public')) :
             if (!isset($user->ID) || $this->skip_recaptcha_checks($user)) { return $user; }
             // Check for reCAPTCHA nonce
             if (isset($_POST['woocommerce-login-nonce'])) {
-                $check = JKMCCFW_Utils::jkmccfw_recaptcha_check(); // Assuming this method exists
+                // Verify the nonce
+                if (!wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['woocommerce-login-nonce'])), 'woocommerce-login')) {
+                    return new WP_Error('nonce_verification_failed', __('Nonce verification failed. Please try again.', 'jkm-checkout-captcha-for-woo'));
+                }
+                $check = JKMCCFW_Utils::jkmccfw_recaptcha_check();
                 $success = $check['success'];
                 if (!$success) {
                     return new WP_Error('authentication_failed', __('Please complete the reCAPTCHA to verify that you are not a robot.', 'jkm-checkout-captcha-for-woo'));
@@ -219,6 +223,13 @@ if (!class_exists('JKMCCFW_Public')) :
         public function check_woocommerce_reset_recaptcha($validation_errors) {
             // Check for reCAPTCHA on password reset
             if (isset($_POST['woocommerce-lost-password-nonce'])) {
+
+                $nonce = sanitize_text_field( wp_unslash($_POST['woocommerce-lost-password-nonce']));
+
+                // Verify the nonce
+                if (!wp_verify_nonce($nonce, 'woocommerce-lost-password')) {
+                    return new WP_Error('nonce_verification_failed', esc_html__('Nonce verification failed. Please try again.', 'jkm-checkout-captcha-for-woo'));
+                }
                 $check = JKMCCFW_Utils::jkmccfw_recaptcha_check();
                 $success = $check['success'];
                 if (!$success) {
@@ -274,7 +285,12 @@ if (!class_exists('JKMCCFW_Public')) :
         }
 
         private function is_wp_login_page() {
-            return stripos($_SERVER["REQUEST_URI"], strrchr(wp_login_url(), '/')) !== false;
+            // return stripos($_SERVER["REQUEST_URI"], strrchr(wp_login_url(), '/')) !== false;
+            if (isset($_SERVER["REQUEST_URI"])) {
+                $request_uri = sanitize_text_field( wp_unslash($_SERVER["REQUEST_URI"]) );
+                return stripos($request_uri, strrchr(wp_login_url(), '/')) !== false;
+            }
+            return false;
         }
 
         public function add_recaptcha_field() {

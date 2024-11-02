@@ -27,41 +27,38 @@ class JKMCCFW_Utils {
 
     // Check the reCAPTCHA on submit.
     public static function jkmccfw_recaptcha_check() {
-        if ( isset( $_POST['captcha_form_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['captcha_form_nonce'] ) ), 'captcha_form_action' ) ) {
-            $postdata = "";
-            if(isset($_POST['g-recaptcha-response'])) {
-                $postdata = sanitize_text_field( wp_unslash( $_POST['g-recaptcha-response'] ) );
-            }
+        $postdata = "";
+        if(isset($_POST['g-recaptcha-response'])) {
+            $postdata = sanitize_text_field( wp_unslash( $_POST['g-recaptcha-response'] ) );
+        }
 
-            $key = esc_attr( get_option('jkmccfw_key') );
-            $secret = esc_attr( get_option('jkmccfw_secret') );
-            $guest = esc_attr( get_option('jkmccfw_guest_only') );
+        $key = esc_attr( get_option('jkmccfw_key') );
+        $secret = esc_attr( get_option('jkmccfw_secret') );
+        $guest = esc_attr( get_option('jkmccfw_guest_only') );
 
-            if($key && $secret) {
+        if($key && $secret) {
 
-                $verify = wp_remote_get( 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $postdata );
-                $verify = wp_remote_retrieve_body( $verify );
-                $response = json_decode($verify);
+            $verify = wp_remote_get( 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $postdata );
+            $verify = wp_remote_retrieve_body( $verify );
+            $response = json_decode($verify);
 
-                $results['success'] = $response->success;
+            $results['success'] = $response->success;
 
-                foreach($response as $key => $val) {
-                    if($key == 'error-codes') {
-                        foreach($val as $key => $error_val) {
-                            $results['error_code'] = $error_val;
-                        }
+            foreach($response as $key => $val) {
+                if($key == 'error-codes') {
+                    foreach($val as $key => $error_val) {
+                        $results['error_code'] = $error_val;
                     }
                 }
-
-                return $results;
-
-            } else {
-
-                return false;
-
             }
+
+            return $results;
+
+        } else {
+
+            return false;
+
         }
-        return false;
     }
 
     // Admin test form to check reCAPTCHA response
