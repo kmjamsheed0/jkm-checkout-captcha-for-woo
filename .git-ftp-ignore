@@ -1,0 +1,9 @@
+.*
+Gruntfile.js
+package.json
+admin/assets/js/inc
+admin/assets/js/jkmccfw-admin.js
+admin/assets/css/jkmccfw-admin.css
+public/assets/js/inc
+public/assets/js/jkmccfw-public.js
+public/assets/css/jkmccfw-public.css

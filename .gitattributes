@@ -1,0 +1,9 @@
+.* export-ignore  
+Gruntfile.js export-ignore
+package.json export-ignore
+admin/assets/js/inc export-ignore
+admin/assets/js/jkmccfw-admin.js export-ignore
+admin/assets/css/jkmccfw-admin.css export-ignore
+public/assets/js/inc export-ignore
+public/assets/js/jkmccfw-public.js export-ignore
+public/assets/css/jkmccfw-public.css export-ignore
