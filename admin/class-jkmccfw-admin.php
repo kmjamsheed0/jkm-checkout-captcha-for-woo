@@ -72,7 +72,7 @@ if (!class_exists('JKMCCFW_Admin')) :
 
         public function render_settings_page() {
             if (!current_user_can('manage_options')) {
-                wp_die(__('You do not have sufficient permissions to access this page.', 'jkm-checkout-captcha-for-woo'));
+                wp_die( esc_html__('You do not have sufficient permissions to access this page.', 'jkm-checkout-captcha-for-woo'));
             }
             ?>
             <div class="wrap">
@@ -80,10 +80,10 @@ if (!class_exists('JKMCCFW_Admin')) :
 
                 <?php
                     if (empty(get_option('jkmccfw_tested')) || get_option('jkmccfw_tested') != 'yes') {
-                        echo JKMCCFW_Utils::jkmccfw_admin_test();
+                        echo esc_html(JKMCCFW_Utils::jkmccfw_admin_test());
                     } else {
                         echo '<p style="font-weight: bold; color: green; margin-top: 28px;">
-                                <span class="dashicons dashicons-yes-alt"></span> ' . __('Success! reCAPTCHA seems to be working correctly with your API keys.', 'jkm-checkout-captcha-for-woo') . '</p>';
+                                <span class="dashicons dashicons-yes-alt"></span> ' . esc_html__('Success! reCAPTCHA seems to be working correctly with your API keys.', 'jkm-checkout-captcha-for-woo') . '</p>';
                     }
                     $this->settings->render_tabs(); 
                  ?>
