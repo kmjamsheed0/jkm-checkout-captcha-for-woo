@@ -1,0 +1,111 @@
+=== Checkout Captcha for WooCommerce ===
+Contributors: jamsheedkm
+Donate link: https://github.com/kmjamsheed0/
+Tags: captcha,checkout recaptcha,captcha protect,login recaptcha,google recaptcha
+Requires at least: 5.0
+Tested up to: 6.7
+Requires PHP: 5.6
+Stable tag: 1.0.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Adds reCAPTCHA verification to WooCommerce checkout, login, registration, and password reset forms to prevent spam and bot transactions.
+
+== Description ==
+**Checkout Captcha for WooCommerce** enhances your WooCommerce checkout, WordPress login, registration, and password reset forms by integrating reCAPTCHA verification, helping to prevent spam and bot transactions.
+
+- **Multi-Form Support:** Seamlessly integrates reCAPTCHA in WooCommerce checkout, as well as WordPress login, registration, and password reset forms.
+- **Guest Checkout Compatibility:** Offers the option to enable or disable reCAPTCHA for guest checkouts, enhancing user experience while maintaining security.
+- **Payment Method Flexibility:** Skip reCAPTCHA verification for specific payment methods, enhancing the checkout experience and improving conversion rates (ideal for compatibility with `Express Checkout` plugin).
+- **Customizable Positioning:** Users can select different positions for displaying the reCAPTCHA on the checkout page, offering flexibility to suit various store layouts.
+- **Additional Filters for Customization:** Provides hooks and filters to allow users to customize the positioning and functionality of the reCAPTCHA in their checkout process.
+- **Google reCAPTCHA Configuration:** Easily configure reCAPTCHA using Google’s v2 by providing both the site key and secret key.
+- **Test Functionality:** Test the reCAPTCHA setup directly from the admin panel after entering your API keys, ensuring everything works correctly before going live.
+
+= Key Features =
+
+**1. Multi-Form Integration:**
+- Add reCAPTCHA to WooCommerce checkout, WordPress login, registration, and password reset forms to enhance security.
+   
+**2. Guest Checkout Option:**
+- Configure reCAPTCHA to be optional for guest checkouts, balancing security and convenience.
+   
+**3. Payment Method Customization:**
+- Skip reCAPTCHA for selected payment methods, streamlining the checkout process for quicker transactions.
+   
+**4. Flexible Positioning:**
+- Choose the display position of reCAPTCHA on the checkout page, ensuring it fits seamlessly into your store's layout.
+   
+**5. Advanced Filters and Hooks:**
+- Utilize additional hooks and filters for advanced customization, allowing developers to extend functionality easily.
+   
+**6. Google reCAPTCHA Setup:**
+- Configure reCAPTCHA using Google’s API by entering the site key and secret key, and validate the setup from the admin dashboard.
+   
+**7. Admin Testing Feature:**
+- Test reCAPTCHA functionality in the admin area to confirm proper integration before your customers encounter it.
+
+**8. Dynamic Theme Compatibility:**
+- reCAPTCHA will be displayed in both light and dark themes as users select, providing an adaptive visual experience.
+- Users can choose the captcha theme (dark or light) to match their preferences.
+
+== Installation ==
+
+1. Upload the plugin files to the `/wp-content/plugins/jkm-checkout-captcha-for-woo` directory, or install the plugin through the WordPress plugins screen directly.
+2. Activate the plugin through the 'Plugins' screen in WordPress.
+3. Configure the settings under WooCommerce -> Checkout Captcha.
+
+== Frequently Asked Questions ==
+
+= How do I access the plugin settings? =
+You can access the Checkout Captcha settings by navigating to **WooCommerce** > **Checkout Captcha** in the WordPress admin dashboard.
+
+= What tabs are available in the plugin settings? =
+The plugin settings include three tabs:
+1. **WooCommerce Forms**: Add reCAPTCHA to WooCommerce login, registration, and checkout forms. You can enable or disable reCAPTCHA for guest checkouts.
+2. **WordPress Forms**: Enable reCAPTCHA for WordPress login, registration, and password reset forms by checking the respective boxes.
+3. **Configuration**: Enter your Google reCAPTCHA V2 site key and secret key. You can also test the reCAPTCHA setup after entering the correct API keys.
+
+= How do I test my Google reCAPTCHA configuration? =
+After submitting your site key and secret key in the Configuration tab, you will see a test captcha wizard in the header. You can test the reCAPTCHA setup directly from the admin panel to ensure that everything is functioning correctly.
+
+= How can I verify that I configured reCAPTCHA correctly? =
+After testing the reCAPTCHA response in the admin panel, you will see a success message in the menu header: "Success! reCAPTCHA seems to be working correctly with your API keys."
+
+= What options do I have for displaying reCAPTCHA on the checkout page? =
+In the WooCommerce Forms tab, you can select a widget location for reCAPTCHA using a dropdown menu. Available options include:
+- Before payment
+- After payment
+- Before billing
+- After billing
+- Before checkout form
+- After checkout form
+
+You can also add more scenarios using the provided filter hook (`jkmccfw_checkout_captcha_position_hook`).
+
+= How can I enable reCAPTCHA for guest checkouts? =
+In the WooCommerce Forms tab, there is a checkbox labeled **Guest Checkout Only**. By checking this box, you can control whether reCAPTCHA is displayed for guest users during the checkout process.
+
+= Can I customize the appearance of reCAPTCHA? =
+Yes, in the Configuration tab, you can select the reCAPTCHA theme, choosing between light and dark themes to match your store's design.
+
+= Is this plugin developer-friendly? =
+Absolutely! The plugin provides hooks and filters for advanced customization. You can use the following filters to customize the reCAPTCHA positioning and functionality:
+- `jkmccfw_checkout_captcha_position_hook`: Customize the hook for displaying the reCAPTCHA.
+- `jkmccfw_checkout_captcha_position_hook_priority`: Set the priority for the reCAPTCHA display hook.
+
+= What happens if I don't enter the site key and secret key? =
+If the site key and secret key are not provided, the reCAPTCHA will not be displayed on the checkout or forms, and you will lack protection against spam and bot transactions.
+
+== Changelog ==
+
+= 1.0.0 =
+* Initial release
+* Added reCAPTCHA to WooCommerce checkout, login, and registration forms.
+* Added reCAPTCHA to WordPress login, registration, and lost password forms.
+* Included customizable reCAPTCHA styles.
+
+== Upgrade Notice ==
+
+= 1.0.0 =
+Initial release.
