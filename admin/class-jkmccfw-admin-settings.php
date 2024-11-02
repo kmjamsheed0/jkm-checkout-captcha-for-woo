@@ -97,7 +97,7 @@ if (!class_exists('JKMCCFW_Admin_Settings')) :
                     </td>
                 </tr>
                 <tr valign="top" class="<?php echo (!$is_woocommerce_active ? 'jkmccfw-disabled-row' : ''); ?>">
-                    <th scope="row" style="padding-top: 0px;">
+                    <th scope="row" style="padding-top: 1%;">
                         <?php esc_html_e('Widget Location on Checkout', 'jkm-checkout-captcha-for-woo'); ?>
                     </th>
                     <td style="padding-top: 0px;">
@@ -219,9 +219,9 @@ if (!class_exists('JKMCCFW_Admin_Settings')) :
             <tr valign="top">
                 <th scope="row">
                     <?php esc_html_e('Payment Methods to Skip', 'jkm-checkout-captcha-for-woo'); ?>
-                    <span class="dashicons dashicons-info tooltip" aria-label="<?php esc_attr_e('Skip reCAPTCHA for the following payment methods to enhance Express Checkout compatibility.', 'jkm-checkout-captcha-for-woo'); ?>"></span>
+                    <span class="dashicons dashicons-info tooltip" aria-label="<?php esc_attr_e('Skip reCAPTCHA verification for the following payment methods to enhance Express Checkout compatibility.', 'jkm-checkout-captcha-for-woo'); ?>"></span>
                     <span class="tooltip-text">
-                        <?php esc_html_e('Skip reCAPTCHA for the following payment methods to enhance Express Checkout compatibility.', 'jkm-checkout-captcha-for-woo'); ?>
+                        <?php esc_html_e('Skip reCAPTCHA verification for the following payment methods to enhance Express Checkout compatibility.', 'jkm-checkout-captcha-for-woo'); ?>
                     </span>
                 </th>
 
@@ -229,7 +229,7 @@ if (!class_exists('JKMCCFW_Admin_Settings')) :
                     <div class="jkmccfw-payment-methods__div">
                     <div class="payment-methods-wrapper">
                         <p class="description">
-                            <?php esc_html_e('Select payment methods to skip reCAPTCHA verification', 'jkm-checkout-captcha-for-woo'); ?>
+                            <?php esc_html_e('Select payment methods to skip reCAPTCHA verification during the checkout process.', 'jkm-checkout-captcha-for-woo'); ?>
                         </p>
                         <?php foreach ($available_gateways as $gateway) : ?>
                             <label>
