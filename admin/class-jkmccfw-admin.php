@@ -20,15 +20,9 @@ if (!class_exists('JKMCCFW_Admin')) :
 
         public function __construct() {
             $this->settings = new JKMCCFW_Admin_Settings();
-            
             add_action('admin_init', array($this, 'register_jkmccfw_settings'));
-            // add_action('admin_menu', array($this, 'jkmccfw_admin_menu'));
-            // add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
             add_action('update_option_jkmccfw_key', array($this, 'jkmccfw_keys_updated'), 10);
             add_action('update_option_jkmccfw_secret', array($this, 'jkmccfw_keys_updated'), 10);
-            
-            // Add filter for plugin action links
-            // add_filter('plugin_action_links_' . plugin_basename(JKMCCFW_PLUGIN_FILE), array($this, 'plugin_action_links'));
         }
 
         public function jkmccfw_admin_script_enqueue($hook) {
