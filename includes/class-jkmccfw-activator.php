@@ -27,6 +27,10 @@ class JKMCCFW_Activator {
 	 * Saves user ID to ensure it only redirects for the user who activated the plugin.
 	 */
 	public static function save_option_activation_redirect() {
+		// Verify nonce before processing the request
+	    if ( isset( $_POST['_wpnonce'] ) && ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'bulk-plugins' ) ) {
+	        return;
+	    }
 		// Don't do redirects when multiple plugins are bulk activated
 		if (
 			( isset( $_REQUEST['action'] ) && 'activate-selected' === $_REQUEST['action'] ) &&
