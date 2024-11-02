@@ -48,9 +48,12 @@ if (!class_exists('JKMCCFW_Public')) :
 
         // Main enqueue script method
         private function enqueue_scripts() {
+            $debug_mode = apply_filters('jkmfs_debug_mode', false);
+            $suffix = $debug_mode ? '' : '.min';
+
             wp_enqueue_script(
                 'jkmccfw-public-script',
-                JKMCCFW_PUBLIC_ASSETS_URL . 'js/jkmccfw-public.js',
+                JKMCCFW_PUBLIC_ASSETS_URL . 'js/jkmccfw-public'. $suffix .'.js',
                 array('jquery'),
                 JKMCCFW_VERSION,
                 true

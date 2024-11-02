@@ -29,17 +29,19 @@ if (!class_exists('JKMCCFW_Admin')) :
             if ($hook !== $this->screen_id) {
                 return;
             }
+            $debug_mode = apply_filters('jkmfs_debug_mode', false);
+            $suffix = $debug_mode ? '' : '.min';
 
             wp_enqueue_style(
                 'jkmccfw-admin-style',
-                JKMCCFW_ADMIN_ASSETS_URL . 'css/jkmccfw-admin.css',
+                JKMCCFW_ADMIN_ASSETS_URL . 'css/jkmccfw-admin'. $suffix .'.css',
                 array(),
                 JKMCCFW_VERSION
             );
 
             wp_enqueue_script(
                 'jkmccfw-admin-script',
-                JKMCCFW_ADMIN_ASSETS_URL . 'js/jkmccfw-admin.js',
+                JKMCCFW_ADMIN_ASSETS_URL . 'js/jkmccfw-admin'. $suffix .'.js',
                 array('jquery'),
                 JKMCCFW_VERSION,
                 true
