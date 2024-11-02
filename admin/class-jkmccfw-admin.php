@@ -49,7 +49,10 @@ if (!class_exists('JKMCCFW_Admin')) :
 
             wp_register_script(
                 "recaptcha", 
-                "https://www.google.com/recaptcha/api.js?explicit&hl=" . get_locale()
+                "https://www.google.com/recaptcha/api.js?explicit&hl=" . get_locale(),
+                array(),
+                JKMCCFW_VERSION,
+                true
             );
             wp_enqueue_script("recaptcha");
         }
@@ -89,6 +92,8 @@ if (!class_exists('JKMCCFW_Admin')) :
                  ?>
                 <form method="post" action="options.php">
                     <?php
+                    // Generate nonce field for the settings form
+                    wp_nonce_field('jkmccfw_settings_action', 'jkmccfw_settings_nonce');
                     settings_fields('jkmccfw-settings-group');
                     do_settings_sections('jkmccfw-settings-group');
                     

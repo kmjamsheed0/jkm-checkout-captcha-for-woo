@@ -62,7 +62,7 @@ if (!class_exists('JKMCCFW_Public')) :
                 'recaptcha',
                 'https://www.google.com/recaptcha/api.js?explicit&hl=' . get_locale(),
                 array(),
-                null,
+                JKMCCFW_VERSION,
                 true
             );
         }
