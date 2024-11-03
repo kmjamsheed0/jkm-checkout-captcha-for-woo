@@ -230,7 +230,7 @@ if (!class_exists('JKMCCFW_Public')) :
                 $nonce = sanitize_text_field( wp_unslash($_POST['woocommerce-lost-password-nonce']));
 
                 // Verify the nonce
-                if (!wp_verify_nonce($nonce, 'woocommerce-lost-password')) {
+                if (!wp_verify_nonce($nonce, 'lost_password')) {
                     return new WP_Error('nonce_verification_failed', esc_html__('Nonce verification failed. Please try again.', 'jkm-checkout-captcha-for-woo'));
                 }
                 $check = JKMCCFW_Utils::jkmccfw_recaptcha_check();
