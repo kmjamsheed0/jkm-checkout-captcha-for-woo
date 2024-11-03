@@ -92,8 +92,7 @@ if (!class_exists('JKMCCFW_Admin')) :
                  ?>
                 <form method="post" action="options.php">
                     <?php
-                    // Generate nonce field for the settings form
-                    wp_nonce_field('jkmccfw_settings_action', 'jkmccfw_settings_nonce');
+
                     settings_fields('jkmccfw-settings-group');
                     do_settings_sections('jkmccfw-settings-group');
                     

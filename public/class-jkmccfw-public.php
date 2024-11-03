@@ -169,6 +169,12 @@ if (!class_exists('JKMCCFW_Public')) :
             $skip = false;
 
             if (isset($_POST['payment_method'])) {
+                // Check nonce first
+                if (isset($_POST['woocommerce-process-checkout-nonce']) && 
+                    !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['woocommerce-process-checkout-nonce'])), 'woocommerce-process_checkout')) {
+                    // Nonce verification failed
+                    return new WP_Error('nonce_verification_failed', __('Nonce verification failed. Please try again.', 'jkm-checkout-captcha-for-woo'));
+                }
                 $chosen_payment_method = sanitize_text_field(wp_unslash($_POST['payment_method']));
                 $selected_payment_methods = get_option('jkmccfw_selected_payment_methods', array());
 
