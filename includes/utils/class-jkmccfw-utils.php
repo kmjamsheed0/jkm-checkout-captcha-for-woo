@@ -66,7 +66,6 @@ class JKMCCFW_Utils {
         ?>
         <form action="" method="POST" class="jkmccfw-admin-form">
             <?php
-            wp_nonce_field( 'captcha_form_action', 'captcha_form_nonce' );
             if (!empty(get_option('jkmccfw_key')) && !empty(get_option('jkmccfw_secret'))) {
                 $check = self::jkmccfw_recaptcha_check();
                 $success = '';
