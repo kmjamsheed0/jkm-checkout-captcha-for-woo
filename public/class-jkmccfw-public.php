@@ -82,7 +82,7 @@ if (!class_exists('JKMCCFW_Public')) :
 
             if (!isset($user->ID) || $this->skip_recaptcha_checks($user)) { return $user; }
 
-            if(isset($_POST['woocommerce-login-nonce']) && wp_verify_nonce(sanitize_text_field($_POST['woocommerce-login-nonce']), 'woocommerce-login')) { return $user; } // Skip Woo
+            if(isset($_POST['woocommerce-login-nonce']) && wp_verify_nonce(sanitize_text_field( wp_unslash( $_POST['woocommerce-login-nonce'])), 'woocommerce-login')) { return $user; } // Skip Woo
             if(is_wp_error($user) && isset($user->errors['empty_username']) && isset($user->errors['empty_password']) ) {return $user; } // Skip Errors
 
             if (isset($_SESSION['jkmccfw_login_checked']) && wp_verify_nonce(sanitize_text_field($_SESSION['jkmccfw_login_checked']), 'jkmccfw_login_check')) {

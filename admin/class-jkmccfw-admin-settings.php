@@ -45,7 +45,7 @@ if (!class_exists('JKMCCFW_Admin_Settings')) :
          * Get current active tab
          */
         public function get_current_tab() {
-            return isset($_GET['tab']) ? sanitize_key($_GET['tab']) : 'woocommerce';
+            return isset($_GET['tab']) ? sanitize_key( wp_unslash( $_GET['tab'])) : 'woocommerce';
         }
 
         /**
