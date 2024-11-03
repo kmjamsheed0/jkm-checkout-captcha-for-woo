@@ -82,12 +82,15 @@ if (!class_exists('JKMCCFW_Public')) :
 
             if (!isset($user->ID) || $this->skip_recaptcha_checks($user)) { return $user; }
 
+            if(isset($_POST['woocommerce-login-nonce']) && wp_verify_nonce(sanitize_text_field($_POST['woocommerce-login-nonce']), 'woocommerce-login')) { return $user; } // Skip Woo
+            if(is_wp_error($user) && isset($user->errors['empty_username']) && isset($user->errors['empty_password']) ) {return $user; } // Skip Errors
+
             if (isset($_SESSION['jkmccfw_login_checked']) && wp_verify_nonce(sanitize_text_field($_SESSION['jkmccfw_login_checked']), 'jkmccfw_login_check')) {
                 return $user;
             }
 
             if ($this->is_wp_login_page()) {
-                $check = $this->check_recaptcha();
+                $check = JKMCCFW_Utils::jkmccfw_recaptcha_check();
                 if (!$check['success']) {
                     return new WP_Error('authentication_failed', __('Please complete the reCAPTCHA to verify that you are not a robot.', 'jkm-checkout-captcha-for-woo'));
                 }
@@ -269,15 +272,6 @@ if (!class_exists('JKMCCFW_Public')) :
             }
         }
 
-
-
-        // Utility functions
-        private function check_recaptcha() {
-            // Implement your reCAPTCHA verification logic here
-            return ['success' => true]; // Placeholder for actual response
-        }
-
-
         private function skip_recaptcha_checks($user = null) {
             return (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) ||
                    (defined('REST_REQUEST') && REST_REQUEST) ||
@@ -285,7 +279,6 @@ if (!class_exists('JKMCCFW_Public')) :
         }
 
         private function is_wp_login_page() {
-            // return stripos($_SERVER["REQUEST_URI"], strrchr(wp_login_url(), '/')) !== false;
             if (isset($_SERVER["REQUEST_URI"])) {
                 $request_uri = sanitize_text_field( wp_unslash($_SERVER["REQUEST_URI"]) );
                 return stripos($request_uri, strrchr(wp_login_url(), '/')) !== false;
