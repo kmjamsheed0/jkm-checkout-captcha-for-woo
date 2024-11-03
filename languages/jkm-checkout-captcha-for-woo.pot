@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-11-02T18:52:56+00:00\n"
+"POT-Creation-Date: 2024-11-03T05:17:55+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: jkm-checkout-captcha-for-woo\n"
@@ -196,20 +196,20 @@ msgstr ""
 msgid "TEST RESPONSE"
 msgstr ""
 
-#: public/class-jkmccfw-public.php:92
-#: public/class-jkmccfw-public.php:135
-#: public/class-jkmccfw-public.php:188
-#: public/class-jkmccfw-public.php:205
-#: public/class-jkmccfw-public.php:218
-#: public/class-jkmccfw-public.php:236
+#: public/class-jkmccfw-public.php:95
+#: public/class-jkmccfw-public.php:138
+#: public/class-jkmccfw-public.php:191
+#: public/class-jkmccfw-public.php:208
+#: public/class-jkmccfw-public.php:221
+#: public/class-jkmccfw-public.php:239
 msgid "Please complete the reCAPTCHA to verify that you are not a robot."
 msgstr ""
 
-#: public/class-jkmccfw-public.php:118
+#: public/class-jkmccfw-public.php:121
 msgid "<strong>ERROR</strong>: Please complete the reCAPTCHA to verify that you are not a robot."
 msgstr ""
 
-#: public/class-jkmccfw-public.php:200
-#: public/class-jkmccfw-public.php:231
+#: public/class-jkmccfw-public.php:203
+#: public/class-jkmccfw-public.php:234
 msgid "Nonce verification failed. Please try again."
 msgstr ""
