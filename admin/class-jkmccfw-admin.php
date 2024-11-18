@@ -122,9 +122,9 @@ if (!class_exists('JKMCCFW_Admin')) :
                 'jkmccfw_selected_payment_methods',
                 'jkmccfw_woo_checkout_pos'
             ];
-            
+
             foreach ($settings as $setting) {
-                register_setting('jkmccfw-settings-group', $setting);
+                register_setting('jkmccfw-settings-group', $setting, ['sanitize_callback' => ['JKMCCFW_Utils', 'jkmccfw_sanitize_setting']]);
             }
         }
 
