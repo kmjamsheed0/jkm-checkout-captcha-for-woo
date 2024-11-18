@@ -24,8 +24,8 @@ add_action('before_woocommerce_init', function() {
     }
 });
 
-if (!function_exists('is_woocommerce_active')){
-	function is_woocommerce_active(){
+if (!function_exists('jkmccfw_is_woocommerce_active')){
+	function jkmccfw_is_woocommerce_active(){
 	    $active_plugins = (array) get_option('active_plugins', array());
 	    if(is_multisite()){
 		   $active_plugins = array_merge($active_plugins, get_site_option('active_sitewide_plugins', array()));
@@ -34,12 +34,12 @@ if (!function_exists('is_woocommerce_active')){
 	}
 }
 
-if(is_woocommerce_active()) {
+if(jkmccfw_is_woocommerce_active()) {
 
 	/**
 	 * The code that runs during plugin activation.
 	 */
-	function activate_thwec() {
+	function jkmccfw_activate() {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-jkmccfw-activator.php';
 		JKMCCFW_Activator::activate();
 	}
@@ -47,13 +47,13 @@ if(is_woocommerce_active()) {
 	/**
 	 * The code that runs during plugin deactivation.
 	 */
-	function deactivate_thwec() {
+	function jkmccfw_deactivate() {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-jkmccfw-deactivator.php';
 		JKMCCFW_Deactivator::deactivate();
 	}
 	
-	register_activation_hook( __FILE__, 'activate_thwec' );
-	register_deactivation_hook( __FILE__, 'deactivate_thwec' );
+	register_activation_hook( __FILE__, 'jkmccfw_activate' );
+	register_deactivation_hook( __FILE__, 'jkmccfw_deactivate' );
 	
 	if(!class_exists('JKM_Checkout_Captcha_For_Woo')){
 		class JKM_Checkout_Captcha_For_Woo {
