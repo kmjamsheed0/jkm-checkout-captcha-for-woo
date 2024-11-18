@@ -160,5 +160,18 @@ class JKMCCFW_Utils {
         }
     }
 
+    /**
+     * General sanitization callback function.
+     *
+     * @param mixed $input The value to sanitize.
+     * @return mixed The sanitized value.
+     */
+    public static function jkmccfw_sanitize_setting($input) {
+        if (is_array($input)) {
+            return array_map('sanitize_text_field', $input); // Sanitize each element of an array
+        }
+        return sanitize_text_field($input); // Sanitize a single string
+    }
+
 }
 endif;
