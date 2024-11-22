@@ -120,6 +120,14 @@ Absolutely! The plugin provides hooks and filters for advanced customization. Yo
 = What happens if I don't enter the site key and secret key? =
 If the site key and secret key are not provided, the reCAPTCHA will not be displayed on the checkout or forms, and you will lack protection against spam and bot transactions.
 
+== Screenshots ==
+1. WooCommerce Checkout Page.
+2. WooCommerce Login.
+3. WooCommerce Register.
+4. WordPress Login.
+5. WordPress Register.
+6. Reset Password.
+
 == Changelog ==
 
 = 1.0.0 =
