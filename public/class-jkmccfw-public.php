@@ -256,24 +256,34 @@ if (!class_exists('JKMCCFW_Public')) :
             $checkout_position_hp = apply_filters('jkmccfw_checkout_captcha_position_hook_priority', 9999);
 
             // Set up hooks based on the filtered position
-            if (empty($checkout_position) || $checkout_position == "beforepay") {
-                add_action('woocommerce_review_order_before_payment', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), 10);
+            if (empty($checkout_position) || $checkout_position == "beforesubmit") {
+                add_action('woocommerce_review_order_before_submit', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), $checkout_position_hp);
+            } elseif ($checkout_position == "aftersubmit") {
+                add_action('woocommerce_review_order_after_submit', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), $checkout_position_hp);
+            } elseif ($checkout_position == "beforeterms") {
+                add_action('woocommerce_checkout_before_terms_and_conditions', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), $checkout_position_hp);
+            } elseif ($checkout_position == "interms") {
+                add_action('woocommerce_checkout_terms_and_conditions', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), $checkout_position_hp);
+            } elseif ($checkout_position == "afterterms") {
+                add_action('woocommerce_checkout_after_terms_and_conditions', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), $checkout_position_hp);
+            } elseif ($checkout_position == "beforepay") {
+                add_action('woocommerce_review_order_before_payment', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), $checkout_position_hp);
             } elseif ($checkout_position == "afterpay") {
-                add_action('woocommerce_review_order_after_payment', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), 10);
+                add_action('woocommerce_review_order_after_payment', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), $checkout_position_hp);
             } elseif ($checkout_position == "beforebilling") {
-                add_action('woocommerce_before_checkout_billing_form', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), 10);
+                add_action('woocommerce_before_checkout_billing_form', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), $checkout_position_hp);
             } elseif ($checkout_position == "afterbilling") {
-                add_action('woocommerce_after_checkout_billing_form', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), 10);
+                add_action('woocommerce_after_checkout_billing_form', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), $checkout_position_hp);
             } elseif ($checkout_position == "beforeform") {
-                add_action('woocommerce_before_checkout_form', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), 10);
+                add_action('woocommerce_before_checkout_form', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), $checkout_position_hp);
             } elseif ($checkout_position == "afterform") {
-                add_action('woocommerce_after_checkout_form', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), 10);
+                add_action('woocommerce_after_checkout_form', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), $checkout_position_hp);
             } else {
                 // Check if the position is a valid action hook and add the callback
                 if (has_action($checkout_position)) {
                     add_action($checkout_position, array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), $checkout_position_hp);
                 } else {
-                    add_action('woocommerce_review_order_before_payment', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), 10);
+                    add_action('woocommerce_review_order_before_submit', array('JKMCCFW_Utils', 'jkmccfw_field_checkout'), $checkout_position_hp);
                 }
             }
         }

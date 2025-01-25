@@ -106,6 +106,21 @@ if (!class_exists('JKMCCFW_Admin_Settings')) :
                     </th>
                     <td style="padding-top: 0px;">
                         <select name="jkmccfw_woo_checkout_pos" class="jkmccfw-select">
+                            <option value="beforesubmit" <?php selected(get_option('jkmccfw_woo_checkout_pos'), 'beforesubmit', true); ?>>
+                                <?php esc_html_e('Before Submit Button', 'jkm-checkout-captcha-for-woo'); ?>
+                            </option>
+                            <option value="aftersubmit" <?php selected(get_option('jkmccfw_woo_checkout_pos'), 'aftersubmit', true); ?>>
+                                <?php esc_html_e('After Submit Button', 'jkm-checkout-captcha-for-woo'); ?>
+                            </option>
+                            <option value="beforeterms" <?php selected(get_option('jkmccfw_woo_checkout_pos'), 'beforeterms', true); ?>>
+                                <?php esc_html_e('Before Terms and Conditions', 'jkm-checkout-captcha-for-woo'); ?>
+                            </option>
+                            <option value="interms" <?php selected(get_option('jkmccfw_woo_checkout_pos'), 'interms', true); ?>>
+                                <?php esc_html_e('Inside Terms and Conditions', 'jkm-checkout-captcha-for-woo'); ?>
+                            </option>
+                            <option value="afterterms" <?php selected(get_option('jkmccfw_woo_checkout_pos'), 'afterterms', true); ?>>
+                                <?php esc_html_e('After Terms and Conditions', 'jkm-checkout-captcha-for-woo'); ?>
+                            </option>
                             <option value="beforepay" <?php selected(get_option('jkmccfw_woo_checkout_pos'), 'beforepay', true); ?>>
                                 <?php esc_html_e('Before Payment', 'jkm-checkout-captcha-for-woo'); ?>
                             </option>
