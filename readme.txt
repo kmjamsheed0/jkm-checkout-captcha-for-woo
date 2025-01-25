@@ -97,12 +97,17 @@ After testing the reCAPTCHA response in the admin panel, you will see a success 
 
 = What options do I have for displaying reCAPTCHA on the checkout page? =
 In the WooCommerce Forms tab, you can select a widget location for reCAPTCHA using a dropdown menu. Available options include:
-- Before payment
-- After payment
-- Before billing
-- After billing
-- Before checkout form
-- After checkout form
+- Before the **Place Order** button.
+- After the **Place Order** button.
+- Before the **Terms and Conditions**.
+- After the **Terms and Conditions**.
+- Inside the **Terms and Conditions**.
+- Before **Payment**.
+- After **Payment**.
+- Before **Billing**.
+- After **Billing**.
+- Before **Checkout Form**.
+- After **Checkout Form**.
 
 You can also add more scenarios using the provided filter hook (`jkmccfw_checkout_captcha_position_hook`).
 
@@ -131,6 +136,7 @@ If the site key and secret key are not provided, the reCAPTCHA will not be displ
 == Changelog ==
 
 = 1.0.1 =
+* Added more positions to display CAPTCHA on the checkout page.
 * Added compatibility with WooCommerce **9.6**.
 * Added compatibility with WordPress **6.7**.
 
@@ -143,4 +149,4 @@ If the site key and secret key are not provided, the reCAPTCHA will not be displ
 == Upgrade Notice ==
 
 = 1.0.1 =
-* Added compatibility with the latest versions of **WooCommerce** and **WordPress**.
+* Adds new positions for the checkout CAPTCHA. Update now for more flexibility.
