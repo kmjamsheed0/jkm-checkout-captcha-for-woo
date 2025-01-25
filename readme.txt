@@ -1,11 +1,11 @@
 === Checkout Captcha for WooCommerce ===
 Contributors: jamsheedkm
 Donate link: https://github.com/kmjamsheed0/
-Tags: captcha,checkout recaptcha,captcha protect,login recaptcha,google recaptcha
+Tags: captcha,checkout captcha,checkout security,login recaptcha,google recaptcha
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -130,6 +130,10 @@ If the site key and secret key are not provided, the reCAPTCHA will not be displ
 
 == Changelog ==
 
+= 1.0.1 =
+* Added compatibility with WooCommerce **9.6**.
+* Added compatibility with WordPress **6.7**.
+
 = 1.0.0 =
 * Initial release
 * Added reCAPTCHA to WooCommerce checkout, login, and registration forms.
@@ -138,5 +142,5 @@ If the site key and secret key are not provided, the reCAPTCHA will not be displ
 
 == Upgrade Notice ==
 
-= 1.0.0 =
-Initial release.
+= 1.0.1 =
+* Added compatibility with the latest versions of **WooCommerce** and **WordPress**.
