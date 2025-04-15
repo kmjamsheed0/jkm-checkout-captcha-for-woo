@@ -1,0 +1,23 @@
+{
+  "apiVersion": 2,
+  "name": "jkm-checkout-captcha/checkout-captcha",
+  "title": "Checkout Captcha",
+  "category": "woocommerce",
+  "parent": ["woocommerce/checkout"],
+  "description": "Adds reCAPTCHA to the WooCommerce Checkout Block",
+  "textdomain": "jkm-checkout-captcha-for-woo",
+  "attributes": {
+    "lock": {
+      "type": "object",
+      "default": {
+        "remove": true,
+        "move": true
+      }
+    }
+  },
+  "supports": {
+    "html": false,
+    "multiple": false,
+    "reusable": false
+  }
+}
