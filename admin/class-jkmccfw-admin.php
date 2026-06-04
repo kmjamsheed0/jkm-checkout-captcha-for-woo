@@ -115,6 +115,7 @@ if (!class_exists('JKMCCFW_Admin')) :
                 'jkmccfw_register',
                 'jkmccfw_reset',
                 'jkmccfw_woo_checkout',
+                'jkmccfw_woo_checkout_block',
                 'jkmccfw_guest_only',
                 'jkmccfw_woo_login',
                 'jkmccfw_woo_register',

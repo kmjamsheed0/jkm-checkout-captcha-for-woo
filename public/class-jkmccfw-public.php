@@ -143,9 +143,16 @@ if (!class_exists('JKMCCFW_Public')) :
 
         // WooCommerce Checkout reCAPTCHA
         private function conditionally_hook_woocommerce() {
-            if (jkmccfw_is_woocommerce_active() && get_option('jkmccfw_key') && get_option('jkmccfw_woo_checkout')) {
-                $this->setup_checkout_position_hooks();
-                add_action('woocommerce_checkout_process', array($this, 'check_checkout_recaptcha'));
+            if (jkmccfw_is_woocommerce_active() && get_option('jkmccfw_key')) {
+                if (get_option('jkmccfw_woo_checkout')) {
+                    $this->setup_checkout_position_hooks();
+                    add_action('woocommerce_checkout_process', array($this, 'check_checkout_recaptcha'));
+                }
+
+                if ($this->is_checkout_block_recaptcha_enabled()) {
+                    add_action('woocommerce_blocks_checkout_block_registration', array($this, 'register_checkout_block_integration'));
+                    add_action('woocommerce_store_api_checkout_update_order_from_request', array($this, 'check_checkout_block_recaptcha'), 10, 2);
+                }
             }
 
             if (get_option('jkmccfw_woo_login')) {
@@ -164,6 +171,15 @@ if (!class_exists('JKMCCFW_Public')) :
             }
         }
 
+        /**
+         * Check whether reCAPTCHA is enabled for the WooCommerce Checkout block.
+         *
+         * @return bool
+         */
+        private function is_checkout_block_recaptcha_enabled() {
+            return 'on' === get_option('jkmccfw_woo_checkout_block', get_option('jkmccfw_woo_checkout'));
+        }
+
         public function check_checkout_recaptcha() {
             // Skip if reCAPTCHA disabled for payment method
             $skip = false;
@@ -176,14 +192,7 @@ if (!class_exists('JKMCCFW_Public')) :
                     return new WP_Error('nonce_verification_failed', __('Nonce verification failed. Please try again.', 'jkm-checkout-captcha-for-woo'));
                 }
                 $chosen_payment_method = sanitize_text_field(wp_unslash($_POST['payment_method']));
-                $selected_payment_methods = get_option('jkmccfw_selected_payment_methods', array());
-
-                if (is_array($selected_payment_methods)) {
-                    // Check if the chosen payment method is in the selected payment methods array
-                    if (in_array($chosen_payment_method, $selected_payment_methods, true)) {
-                        $skip = true;
-                    }
-                }
+                $skip = $this->should_skip_checkout_recaptcha($chosen_payment_method);
             }
 
             // Check if guest only is enabled
@@ -197,6 +206,91 @@ if (!class_exists('JKMCCFW_Public')) :
                     wc_add_notice(__('Please complete the reCAPTCHA to verify that you are not a robot.', 'jkm-checkout-captcha-for-woo'), 'error');
                 }
             }
+        }
+
+        /**
+         * Register the WooCommerce Checkout Block integration.
+         *
+         * @param Automattic\WooCommerce\Blocks\Integrations\IntegrationRegistry $integration_registry Integration registry.
+         */
+        public function register_checkout_block_integration($integration_registry) {
+            if (!interface_exists('\Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface')) {
+                return;
+            }
+
+            require_once JKMCCFW_PATH . 'public/class-jkmccfw-checkout-block-integration.php';
+
+            if (class_exists('JKMCCFW_Checkout_Block_Integration')) {
+                $integration_registry->register(new JKMCCFW_Checkout_Block_Integration());
+            }
+        }
+
+        /**
+         * Validate reCAPTCHA for Checkout Block / Store API checkout requests.
+         *
+         * @param WC_Order        $order   Order object.
+         * @param WP_REST_Request $request Store API checkout request.
+         *
+         * @throws Automattic\WooCommerce\StoreApi\Exceptions\RouteException When reCAPTCHA validation fails.
+         */
+        public function check_checkout_block_recaptcha($order, $request) {
+            if (\WP_REST_Server::CREATABLE !== $request->get_method()) {
+                return;
+            }
+
+            if ($this->should_skip_checkout_recaptcha($request->get_param('payment_method'))) {
+                return;
+            }
+
+            $guest_only = esc_attr(get_option('jkmccfw_guest_only'));
+            if ($guest_only && is_user_logged_in()) {
+                return;
+            }
+
+            $extensions = (array) $request->get_param('extensions');
+            $captcha_data = isset($extensions['jkm-checkout-captcha-for-woo']) && is_array($extensions['jkm-checkout-captcha-for-woo'])
+                ? $extensions['jkm-checkout-captcha-for-woo']
+                : array();
+            $token = isset($captcha_data['g_recaptcha_response']) && is_scalar($captcha_data['g_recaptcha_response'])
+                ? sanitize_text_field(wp_unslash($captcha_data['g_recaptcha_response']))
+                : '';
+
+            if (empty($token)) {
+                $this->throw_checkout_block_recaptcha_error();
+            }
+
+            $check = JKMCCFW_Utils::jkmccfw_recaptcha_verify_response($token);
+            $success = is_array($check) && !empty($check['success']);
+
+            if (!$success) {
+                $this->throw_checkout_block_recaptcha_error();
+            }
+        }
+
+        /**
+         * Check if checkout reCAPTCHA should be skipped for a payment method.
+         *
+         * @param string $payment_method Payment method ID.
+         * @return bool
+         */
+        private function should_skip_checkout_recaptcha($payment_method) {
+            $payment_method = sanitize_text_field((string) $payment_method);
+            $selected_payment_methods = get_option('jkmccfw_selected_payment_methods', array());
+
+            return is_array($selected_payment_methods) && in_array($payment_method, $selected_payment_methods, true);
+        }
+
+        /**
+         * Throw a Store API validation error for Checkout Block requests.
+         *
+         * @throws Automattic\WooCommerce\StoreApi\Exceptions\RouteException Always throws.
+         */
+        private function throw_checkout_block_recaptcha_error() {
+            throw new \Automattic\WooCommerce\StoreApi\Exceptions\RouteException(
+                'jkmccfw_recaptcha_failed',
+                esc_html__('Please complete the reCAPTCHA to verify that you are not a robot.', 'jkm-checkout-captcha-for-woo'),
+                400
+            );
         }
 
         public function check_woocommerce_login_recaptcha($user) {

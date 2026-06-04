@@ -1,0 +1,9 @@
+.jkmccfw-checkout-captcha-block {
+    box-sizing: border-box;
+    width: 100%;
+    padding-bottom: 16px;
+}
+
+.jkmccfw-checkout-captcha-block .jkmccfw-block-recaptcha {
+    width: 100%;
+}

@@ -32,15 +32,34 @@ class JKMCCFW_Utils {
             $postdata = sanitize_text_field( wp_unslash( $_POST['g-recaptcha-response'] ) );
         }
 
+        return self::jkmccfw_recaptcha_verify_response( $postdata );
+    }
+
+    /**
+     * Verify a reCAPTCHA response token.
+     *
+     * @param string $postdata The response token returned by Google reCAPTCHA.
+     * @return array|false Verification result, or false when keys are not configured.
+     */
+    public static function jkmccfw_recaptcha_verify_response( $postdata ) {
+        $postdata = sanitize_text_field( $postdata );
+
         $key = esc_attr( get_option('jkmccfw_key') );
         $secret = esc_attr( get_option('jkmccfw_secret') );
-        $guest = esc_attr( get_option('jkmccfw_guest_only') );
 
         if($key && $secret) {
 
             $verify = wp_remote_get( 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $postdata );
             $verify = wp_remote_retrieve_body( $verify );
             $response = json_decode($verify);
+
+            $results = array(
+                'success' => false,
+            );
+
+            if ( ! is_object( $response ) || ! isset( $response->success ) ) {
+                return $results;
+            }
 
             $results['success'] = $response->success;
 

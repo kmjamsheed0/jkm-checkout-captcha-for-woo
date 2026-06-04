@@ -1,9 +1,9 @@
 {
-  "apiVersion": 2,
+  "apiVersion": 3,
   "name": "jkm-checkout-captcha/checkout-captcha",
   "title": "Checkout Captcha",
   "category": "woocommerce",
-  "parent": ["woocommerce/checkout"],
+  "parent": ["woocommerce/checkout-fields-block"],
   "description": "Adds reCAPTCHA to the WooCommerce Checkout Block",
   "textdomain": "jkm-checkout-captcha-for-woo",
   "attributes": {

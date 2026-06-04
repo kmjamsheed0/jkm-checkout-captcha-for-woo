@@ -134,6 +134,57 @@
     display: block; /* Show tooltip on hover */
 }
 
+.jkmccfw-tooltip-wrap {
+    display: inline-flex;
+    position: relative;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.jkmccfw-tooltip-icon {
+    color: #646970;
+    cursor: help;
+    line-height: 1;
+}
+
+.jkmccfw-tooltip-icon:focus {
+    outline: 1px solid #2271b1;
+    outline-offset: 2px;
+}
+
+.jkmccfw-tooltip-text {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    width: 260px;
+    padding: 8px 10px;
+    border-radius: 4px;
+    background: #1d2327;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: left;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100000;
+}
+
+.jkmccfw-tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border: 6px solid transparent;
+    border-top-color: #1d2327;
+    transform: translateX(-50%);
+}
+
+.jkmccfw-tooltip-wrap:hover .jkmccfw-tooltip-text,
+.jkmccfw-tooltip-icon:focus + .jkmccfw-tooltip-text {
+    display: block;
+}
+
 /* Admin test form for reCaptcha response */
 .jkmccfw-admin-form .jkmccfw-admin-form-container {
     padding: 20px 20px 25px 20px;
