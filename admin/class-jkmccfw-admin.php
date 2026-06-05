@@ -114,8 +114,6 @@ if (!class_exists('JKMCCFW_Admin')) :
                 'jkmccfw_login',
                 'jkmccfw_register',
                 'jkmccfw_reset',
-                'jkmccfw_woo_checkout',
-                'jkmccfw_woo_checkout_block',
                 'jkmccfw_guest_only',
                 'jkmccfw_woo_login',
                 'jkmccfw_woo_register',
@@ -127,6 +125,42 @@ if (!class_exists('JKMCCFW_Admin')) :
             foreach ($settings as $setting) {
                 register_setting('jkmccfw-settings-group', $setting, ['sanitize_callback' => ['JKMCCFW_Utils', 'jkmccfw_sanitize_setting']]);
             }
+
+            register_setting('jkmccfw-settings-group', 'jkmccfw_woo_checkout', ['sanitize_callback' => array($this, 'sanitize_classic_checkout_setting')]);
+            register_setting('jkmccfw-settings-group', 'jkmccfw_woo_checkout_block', ['sanitize_callback' => array($this, 'sanitize_checkout_block_setting')]);
+        }
+
+        /**
+         * Sanitize the classic checkout CAPTCHA setting.
+         *
+         * @param mixed $input Submitted option value.
+         * @return string
+         */
+        public function sanitize_classic_checkout_setting($input) {
+            $input = sanitize_text_field($input);
+
+            return 'on' === $input ? 'on' : 'off';
+        }
+
+        /**
+         * Sanitize the Checkout block CAPTCHA setting.
+         *
+         * Classic checkout wins if both settings are submitted as enabled.
+         *
+         * @param mixed $input Submitted option value.
+         * @return string
+         */
+        public function sanitize_checkout_block_setting($input) {
+            $input = sanitize_text_field($input);
+            $classic_checkout = isset($_POST['jkmccfw_woo_checkout'])
+                ? sanitize_text_field(wp_unslash($_POST['jkmccfw_woo_checkout']))
+                : 'off';
+
+            if ('on' === $classic_checkout) {
+                return 'off';
+            }
+
+            return 'on' === $input ? 'on' : 'off';
         }
 
         public function jkmccfw_keys_updated() {

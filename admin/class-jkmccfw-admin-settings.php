@@ -75,6 +75,8 @@ if (!class_exists('JKMCCFW_Admin_Settings')) :
          */
         public function render_woocommerce_settings() {
             $is_woocommerce_active = class_exists('WooCommerce');
+            $is_classic_checkout_enabled = 'on' === get_option('jkmccfw_woo_checkout');
+            $is_checkout_block_enabled = !$is_classic_checkout_enabled && 'on' === get_option('jkmccfw_woo_checkout_block');
             ?>
             <div id="tab-woocommerce" class="tab-content">
             <table class="form-table">
@@ -97,12 +99,17 @@ if (!class_exists('JKMCCFW_Admin_Settings')) :
                         <?php esc_html_e('Guest Checkout Only', 'jkm-checkout-captcha-for-woo'); ?>
                     </th>
                     <td>
-                        <input type="checkbox" name="jkmccfw_woo_checkout" <?php checked(get_option('jkmccfw_woo_checkout') == 'on' ); ?>><br/><br/>
-                        <input type="checkbox" name="jkmccfw_woo_checkout_block" <?php checked(get_option('jkmccfw_woo_checkout_block', get_option('jkmccfw_woo_checkout')) == 'on'); ?>>
+                        <input type="hidden" name="jkmccfw_woo_checkout" value="off">
+                        <input type="checkbox" name="jkmccfw_woo_checkout" value="on" class="jkmccfw-checkout-mode-toggle" data-jkmccfw-checkout-mode="classic" <?php checked($is_classic_checkout_enabled); ?> <?php disabled($is_checkout_block_enabled); ?>>
+                        <p class="description jkmccfw-checkout-mode-note">
+                            <?php esc_html_e('Only one checkout CAPTCHA can be enabled at a time. Enable the option that matches your checkout page.', 'jkm-checkout-captcha-for-woo'); ?>
+                        </p>
+                        <input type="hidden" name="jkmccfw_woo_checkout_block" value="off">
+                        <input type="checkbox" name="jkmccfw_woo_checkout_block" value="on" class="jkmccfw-checkout-mode-toggle" data-jkmccfw-checkout-mode="block" <?php checked($is_checkout_block_enabled); ?> <?php disabled($is_classic_checkout_enabled); ?>>
                         <span class="jkmccfw-tooltip-wrap">
-                            <span class="dashicons dashicons-info jkmccfw-tooltip-icon" tabindex="0" aria-label="<?php esc_attr_e('Show reCAPTCHA just above the place order button in the WooCommerce Checkout block.', 'jkm-checkout-captcha-for-woo'); ?>"></span>
+                            <span class="dashicons dashicons-info jkmccfw-tooltip-icon" tabindex="0" aria-label="<?php esc_attr_e('Use this only when your Checkout page uses the Checkout block. The reCAPTCHA appears just above the place order button.', 'jkm-checkout-captcha-for-woo'); ?>"></span>
                             <span class="jkmccfw-tooltip-text" role="tooltip">
-                                <?php esc_html_e('Show reCAPTCHA just above the place order button in the WooCommerce Checkout block.', 'jkm-checkout-captcha-for-woo'); ?>
+                                <?php esc_html_e('Use this only when your Checkout page uses the Checkout block. The reCAPTCHA appears just above the place order button.', 'jkm-checkout-captcha-for-woo'); ?>
                             </span>
                         </span><br/><br/>
                         <input type="checkbox" name="jkmccfw_guest_only" <?php checked(get_option('jkmccfw_guest_only') == 'on'); ?>>

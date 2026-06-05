@@ -185,6 +185,10 @@
     display: block;
 }
 
+.jkmccfw-checkout-mode-note {
+    margin: 0 0 12px;
+}
+
 /* Admin test form for reCaptcha response */
 .jkmccfw-admin-form .jkmccfw-admin-form-container {
     padding: 20px 20px 25px 20px;

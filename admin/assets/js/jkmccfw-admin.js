@@ -20,6 +20,30 @@ jQuery(document).ready(function($) {
     var initialTab = new URLSearchParams(window.location.search).get('tab') || 'woocommerce';
     $('.nav-tab[href="?page=jkmccfw_settings&tab=' + initialTab + '"]').click();
 
+    // Only one checkout CAPTCHA mode can be enabled at a time.
+    var $classicCheckout = $('input[data-jkmccfw-checkout-mode="classic"]');
+    var $checkoutBlock = $('input[data-jkmccfw-checkout-mode="block"]');
+
+    function updateCheckoutModeToggles() {
+        if ($classicCheckout.is(':checked')) {
+            $checkoutBlock.prop('checked', false).prop('disabled', true);
+            $classicCheckout.prop('disabled', false);
+            return;
+        }
+
+        if ($checkoutBlock.is(':checked')) {
+            $classicCheckout.prop('checked', false).prop('disabled', true);
+            $checkoutBlock.prop('disabled', false);
+            return;
+        }
+
+        $classicCheckout.prop('disabled', false);
+        $checkoutBlock.prop('disabled', false);
+    }
+
+    $classicCheckout.add($checkoutBlock).on('change', updateCheckoutModeToggles);
+    updateCheckoutModeToggles();
+
     // Payment methods section toggle
     $('.payment-methods-wrapper').each(function() {
         var $wrapper = $(this);
@@ -43,4 +67,3 @@ jQuery(document).ready(function($) {
         });
     });
 });
-

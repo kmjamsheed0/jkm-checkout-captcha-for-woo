@@ -144,7 +144,7 @@ if (!class_exists('JKMCCFW_Public')) :
         // WooCommerce Checkout reCAPTCHA
         private function conditionally_hook_woocommerce() {
             if (jkmccfw_is_woocommerce_active() && get_option('jkmccfw_key')) {
-                if (get_option('jkmccfw_woo_checkout')) {
+                if ($this->is_classic_checkout_recaptcha_enabled()) {
                     $this->setup_checkout_position_hooks();
                     add_action('woocommerce_checkout_process', array($this, 'check_checkout_recaptcha'));
                 }
@@ -172,12 +172,21 @@ if (!class_exists('JKMCCFW_Public')) :
         }
 
         /**
+         * Check whether reCAPTCHA is enabled for classic WooCommerce checkout.
+         *
+         * @return bool
+         */
+        private function is_classic_checkout_recaptcha_enabled() {
+            return 'on' === get_option('jkmccfw_woo_checkout');
+        }
+
+        /**
          * Check whether reCAPTCHA is enabled for the WooCommerce Checkout block.
          *
          * @return bool
          */
         private function is_checkout_block_recaptcha_enabled() {
-            return 'on' === get_option('jkmccfw_woo_checkout_block', get_option('jkmccfw_woo_checkout'));
+            return 'on' !== get_option('jkmccfw_woo_checkout') && 'on' === get_option('jkmccfw_woo_checkout_block');
         }
 
         public function check_checkout_recaptcha() {
