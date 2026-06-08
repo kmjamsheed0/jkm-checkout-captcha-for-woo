@@ -133,6 +133,7 @@ If the site key and secret key are not provided, the reCAPTCHA will not be displ
 4. WordPress Login.
 5. WordPress Register.
 6. Reset Password.
+7. Checkout Block Page.
 
 == Changelog ==
 

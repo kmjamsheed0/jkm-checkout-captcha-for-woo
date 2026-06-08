@@ -1,0 +1,110 @@
+{
+    "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+    "meta": {
+        "title": "Checkout Captcha for WooCommerce Demo",
+        "description": "A ready-to-use WooCommerce store preview with Checkout Captcha configured on checkout, account, login, registration, and password reset flows.",
+        "author": "Jamsheed KM",
+        "categories": [
+            "woocommerce",
+            "security",
+            "checkout"
+        ]
+    },
+    "landingPage": "/checkout/?add-to-cart=101",
+    "preferredVersions": {
+        "php": "8.3",
+        "wp": "latest"
+    },
+    "features": {
+        "networking": true
+    },
+    "steps": [
+        {
+            "step": "login",
+            "username": "admin"
+        },
+        {
+            "step": "installPlugin",
+            "pluginData": {
+                "resource": "wordpress.org/plugins",
+                "slug": "woocommerce"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installPlugin",
+            "pluginData": {
+                "resource": "wordpress.org/plugins",
+                "slug": "jkm-checkout-captcha-for-woo"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installTheme",
+            "themeData": {
+                "resource": "wordpress.org/themes",
+                "slug": "storefront"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "setSiteOptions",
+            "options": {
+                "blogname": "Captcha Protected Checkout",
+                "blogdescription": "WooCommerce demo store secured with checkout CAPTCHA",
+                "permalink_structure": "/%postname%/",
+                "woocommerce_store_address": "123 Demo Street",
+                "woocommerce_store_address_2": "Suite 100",
+                "woocommerce_store_city": "San Francisco",
+                "woocommerce_store_postcode": "94105",
+                "woocommerce_default_country": "US:CA",
+                "woocommerce_currency": "USD",
+                "woocommerce_weight_unit": "lbs",
+                "woocommerce_dimension_unit": "in",
+                "woocommerce_allow_tracking": "no",
+                "woocommerce_onboarding_profile": {
+                    "skipped": true
+                },
+                "woocommerce_coming_soon": "no",
+                "woocommerce_calc_taxes": "no",
+                "woocommerce_enable_coupons": "yes",
+                "woocommerce_enable_guest_checkout": "yes",
+                "woocommerce_enable_checkout_login_reminder": "yes",
+                "woocommerce_enable_signup_and_login_from_checkout": "yes",
+                "woocommerce_enable_myaccount_registration": "yes",
+                "woocommerce_registration_generate_username": "yes",
+                "woocommerce_registration_generate_password": "yes",
+                "woocommerce_cart_redirect_after_add": "no",
+                "woocommerce_manage_stock": "no",
+                "woocommerce_notify_low_stock": "no",
+                "woocommerce_notify_no_stock": "no",
+                "jkmccfw_key": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
+                "jkmccfw_secret": "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe",
+                "jkmccfw_tested": "yes",
+                "jkmccfw_theme": "light",
+                "jkmccfw_woo_checkout": "on",
+                "jkmccfw_woo_checkout_block": "off",
+                "jkmccfw_woo_checkout_pos": "beforesubmit",
+                "jkmccfw_guest_only": "",
+                "jkmccfw_woo_login": "on",
+                "jkmccfw_woo_register": "on",
+                "jkmccfw_woo_reset": "on",
+                "jkmccfw_login": "on",
+                "jkmccfw_register": "on",
+                "jkmccfw_selected_payment_methods": [],
+                "woocommerce_checkout_privacy_policy_text": "<strong>Demo note:</strong> This checkout uses Google reCAPTCHA v2 test keys, so Google always approves test-key verification. Use the <a href=\"/wp-admin/admin.php?page=jkmccfw_settings&tab=settings\">CAPTCHA configuration page</a> to add real reCAPTCHA v2 keys for blocking tests. Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.",
+                "woocommerce_checkout_terms_and_conditions_checkbox_text": "I have read and agree to the website terms and conditions. Demo note: reCAPTCHA test keys always validate."
+            }
+        },
+        {
+            "step": "runPHP",
+            "code": "<?php\nrequire_once '/wordpress/wp-load.php';\n\nif ( ! class_exists( 'WooCommerce' ) ) {\n    echo 'WooCommerce is not active. Demo setup skipped.';\n    return;\n}\n\nfunction jkmccfw_demo_page( $title, $slug, $content ) {\n    $page = get_page_by_path( $slug );\n    $data = array(\n        'post_title'   => $title,\n        'post_name'    => $slug,\n        'post_content' => $content,\n        'post_status'  => 'publish',\n        'post_type'    => 'page',\n    );\n\n    if ( $page ) {\n        $data['ID'] = $page->ID;\n        return wp_update_post( $data );\n    }\n\n    return wp_insert_post( $data );\n}\n\n$cart_id     = jkmccfw_demo_page( 'Cart', 'cart', '[woocommerce_cart]' );\n$checkout_id = jkmccfw_demo_page( 'Checkout', 'checkout', '<!-- wp:paragraph --><p><strong>Demo note:</strong> This checkout uses Google reCAPTCHA v2 test keys. The CAPTCHA widget is shown so you can preview the plugin placement, but Google always approves test-key verification. To test real blocking behavior, open the <a href=\"/wp-admin/admin.php?page=jkmccfw_settings&tab=settings\">CAPTCHA configuration page</a> and replace the demo keys with your own reCAPTCHA v2 checkbox site key and secret.</p><!-- /wp:paragraph -->[woocommerce_checkout]' );\n$account_id  = jkmccfw_demo_page( 'My account', 'my-account', '[woocommerce_my_account]' );\n$preview_id  = jkmccfw_demo_page( 'Checkout Captcha Preview', 'checkout-captcha-preview', '<!-- wp:heading --><h2>Checkout Captcha Preview</h2><!-- /wp:heading --><!-- wp:paragraph --><p>The demo product opens directly in checkout so you can see the CAPTCHA without extra setup.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p><strong>Demo note:</strong> This preview uses Google reCAPTCHA v2 test keys. The CAPTCHA widget is shown for testing the plugin display, but Google always approves test-key verification. To test real blocking behavior, open the <a href=\"/wp-admin/admin.php?page=jkmccfw_settings&tab=settings\">CAPTCHA configuration page</a> and replace the demo keys with your own reCAPTCHA v2 checkbox site key and secret.</p><!-- /wp:paragraph --><!-- wp:buttons --><div class=\"wp-block-buttons\"><!-- wp:button --><div class=\"wp-block-button\"><a class=\"wp-block-button__link wp-element-button\" href=\"/checkout/?add-to-cart=101\">Preview protected checkout</a></div><!-- /wp:button --><!-- wp:button --><div class=\"wp-block-button\"><a class=\"wp-block-button__link wp-element-button\" href=\"/checkout/\">Go to checkout</a></div><!-- /wp:button --><!-- wp:button {\"className\":\"is-style-outline\"} --><div class=\"wp-block-button is-style-outline\"><a class=\"wp-block-button__link wp-element-button\" href=\"/wp-admin/admin.php?page=jkmccfw_settings\">Open CAPTCHA settings</a></div><!-- /wp:button --></div><!-- /wp:buttons -->' );\n\nupdate_option( 'woocommerce_cart_page_id', absint( $cart_id ) );\nupdate_option( 'woocommerce_checkout_page_id', absint( $checkout_id ) );\nupdate_option( 'woocommerce_myaccount_page_id', absint( $account_id ) );\nupdate_option( 'show_on_front', 'page' );\nupdate_option( 'page_on_front', absint( $preview_id ) );\n\n$gateway_options = array(\n    'woocommerce_bacs_settings' => array(\n        'enabled'      => 'yes',\n        'title'        => 'Direct bank transfer',\n        'description'  => 'Demo payment method for preview orders.',\n        'instructions' => 'No real payment is collected in this Playground demo.',\n    ),\n    'woocommerce_cod_settings' => array(\n        'enabled'     => 'yes',\n        'title'       => 'Cash on delivery',\n        'description' => 'Selected in the CAPTCHA plugin settings as a skipped payment method.',\n    ),\n    'woocommerce_cheque_settings' => array(\n        'enabled' => 'yes',\n        'title'   => 'Check payments',\n    ),\n);\n\nforeach ( $gateway_options as $option_name => $option_value ) {\n    update_option( $option_name, $option_value );\n}\n\n$zone_exists = false;\nforeach ( WC_Shipping_Zones::get_zones() as $zone_data ) {\n    if ( 'Demo Shipping Zone' === $zone_data['zone_name'] ) {\n        $zone_exists = true;\n        break;\n    }\n}\n\nif ( ! $zone_exists ) {\n    $zone = new WC_Shipping_Zone();\n    $zone->set_zone_name( 'Demo Shipping Zone' );\n    $zone->set_zone_order( 0 );\n    $zone->add_location( 'US', 'country' );\n    $zone_id     = $zone->save();\n    $instance_id = $zone->add_shipping_method( 'flat_rate' );\n    update_option( 'woocommerce_flat_rate_' . $instance_id . '_settings', array(\n        'title'      => 'Flat rate',\n        'tax_status' => 'none',\n        'cost'       => '5',\n    ) );\n}\n\nif ( ! term_exists( 'Security Essentials', 'product_cat' ) ) {\n    wp_insert_term( 'Security Essentials', 'product_cat', array( 'description' => 'Demo products for protected checkout testing.' ) );\n}\n\n$products = array(\n    array( 101, 'Spam Shield Starter Kit', 'jkmccfw-demo-kit', '29', 'A demo product that sends shoppers through the CAPTCHA-protected checkout flow. This live preview uses Google reCAPTCHA test keys, so verification always passes until real keys are configured.' ),\n    array( 102, 'Protected Checkout Hoodie', 'jkmccfw-hoodie', '49', 'A sample store product for trying account and checkout protection.' ),\n    array( 103, 'Bot Blocker Mug', 'jkmccfw-mug', '18', 'A simple demo product for cart and checkout testing.' ),\n);\n\nforeach ( $products as $product_data ) {\n    list( $import_id, $name, $sku, $price, $description ) = $product_data;\n    $product_id = wc_get_product_id_by_sku( $sku );\n\n    if ( ! $product_id ) {\n        $product_id = wp_insert_post( array(\n            'import_id'    => $import_id,\n            'post_title'   => $name,\n            'post_content' => $description,\n            'post_excerpt' => $description,\n            'post_status'  => 'publish',\n            'post_type'    => 'product',\n        ) );\n    }\n\n    if ( $product_id && ! is_wp_error( $product_id ) ) {\n        $product = new WC_Product_Simple( $product_id );\n        $product->set_name( $name );\n        $product->set_sku( $sku );\n        $product->set_regular_price( $price );\n        $product->set_price( $price );\n        $product->set_description( $description );\n        $product->set_short_description( $description );\n        $product->set_status( 'publish' );\n        $product->set_catalog_visibility( 'visible' );\n        $product->set_manage_stock( false );\n        $product->set_stock_status( 'instock' );\n        $term = get_term_by( 'name', 'Security Essentials', 'product_cat' );\n        if ( $term ) {\n            $product->set_category_ids( array( $term->term_id ) );\n        }\n        $product->save();\n    }\n}\n\nif ( ! username_exists( 'demo_customer' ) ) {\n    wp_insert_user( array(\n        'user_login'   => 'demo_customer',\n        'user_pass'    => 'password',\n        'user_email'   => 'demo-customer@example.com',\n        'display_name' => 'Demo Customer',\n        'role'         => 'customer',\n    ) );\n}\n\nflush_rewrite_rules();\necho 'Checkout Captcha demo store is ready.';\n?>"
+        }
+    ]
+}
