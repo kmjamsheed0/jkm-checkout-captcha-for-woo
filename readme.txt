@@ -3,9 +3,9 @@ Contributors: jamsheedkm
 Donate link: https://github.com/kmjamsheed0/
 Tags: captcha,checkout captcha,checkout security,login recaptcha,google recaptcha
 Requires at least: 5.0
-Tested up to: 6.7
+Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,7 @@ Adds reCAPTCHA verification to WooCommerce checkout, login, registration, and pa
 == Description ==
 **Checkout Captcha for WooCommerce** enhances your WooCommerce checkout, WordPress login, registration, and password reset forms by integrating reCAPTCHA verification, helping to prevent spam and bot transactions.
 
+- **Checkout Block Compatibility:** Supports WooCommerce Checkout Block with reCAPTCHA displayed before the Place Order button.
 - **Multi-Form Support:** Seamlessly integrates reCAPTCHA in WooCommerce checkout, as well as WordPress login, registration, and password reset forms.
 - **Guest Checkout Compatibility:** Offers the option to enable or disable reCAPTCHA for guest checkouts, enhancing user experience while maintaining security.
 - **Payment Method Flexibility:** Skip reCAPTCHA verification for specific payment methods, enhancing the checkout experience and improving conversion rates (ideal for compatibility with `Express Checkout` plugin).
@@ -134,6 +135,11 @@ If the site key and secret key are not provided, the reCAPTCHA will not be displ
 6. Reset Password.
 
 == Changelog ==
+
+= 1.1.0 =
+* Added Checkout Block reCAPTCHA support.
+* Added compatibility with WooCommerce **10.8**.
+* Added compatibility with WordPress **7.0**.
 
 = 1.0.1 =
 * Added more positions to display CAPTCHA on the checkout page.

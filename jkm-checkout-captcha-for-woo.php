@@ -3,7 +3,7 @@
  * Plugin Name: Checkout Captcha for WooCommerce
  * Description: Adds a CAPTCHA to WooCommerce checkout to enhance security and prevent automated spam orders.
  * Author:      Jamsheed KM
- * Version:     1.0.1
+ * Version:     1.1.0
  * Author URI:  https://github.com/kmjamsheed0
  * Plugin URI:  https://github.com/kmjamsheed0/jkm-checkout-captcha-for-woo
  * Text Domain: jkm-checkout-captcha-for-woo
@@ -12,7 +12,7 @@
  * License URI:	https://www.gnu.org/licenses/gpl-2.0.html
  * Requires Plugins: woocommerce
  * WC requires at least: 4.0.0
- * WC tested up to: 9.6
+ * WC tested up to: 10.8
  */
 
 if(!defined('ABSPATH')){ exit; }
@@ -22,6 +22,7 @@ add_action('before_woocommerce_init', function() {
     if (class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
         \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
         \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('remote_logging', __FILE__, true);
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, true );
     }
 });
 
@@ -65,7 +66,7 @@ if(jkmccfw_is_woocommerce_active()) {
 			}
 
 			public function init() {
-				define('JKMCCFW_VERSION', '1.0.1');
+				define('JKMCCFW_VERSION', '1.1.0');
 				!defined('JKMCCFW_BASE_NAME') && define('JKMCCFW_BASE_NAME', plugin_basename( __FILE__ ));
 				!defined('JKMCCFW_PATH') && define('JKMCCFW_PATH', plugin_dir_path( __FILE__ ));
 				!defined('JKMCCFW_URL') && define('JKMCCFW_URL', plugins_url( '/', __FILE__ ));

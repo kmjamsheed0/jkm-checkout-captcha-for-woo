@@ -117,7 +117,7 @@ if (!class_exists('JKMCCFW_Admin_Settings')) :
                 </tr>
                 <tr valign="top" class="<?php echo (!$is_woocommerce_active ? 'jkmccfw-disabled-row' : ''); ?>">
                     <th scope="row" style="padding-top: 1%;">
-                        <?php esc_html_e('Widget Location on Checkout', 'jkm-checkout-captcha-for-woo'); ?>
+                        <?php esc_html_e('CAPTCHA Position in Classic Checkout', 'jkm-checkout-captcha-for-woo'); ?>
                     </th>
                     <td style="padding-top: 0px;">
                         <select name="jkmccfw_woo_checkout_pos" class="jkmccfw-select">
