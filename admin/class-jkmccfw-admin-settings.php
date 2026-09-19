@@ -92,10 +92,13 @@ if (!class_exists('JKMCCFW_Admin_Settings')) :
                         <input type="checkbox" name="jkmccfw_woo_register" <?php checked(get_option('jkmccfw_woo_register') == 'on'); ?>>
                     </td>
                 </tr>
+                <tr valign="middle" class="<?php echo (!$is_woocommerce_active ? 'jkmccfw-disabled-row' : ''); ?>">
+                    <th scope="row" style="font-weight: 700;font-size: medium;"><?php esc_html_e('WooCommerce Checkout', 'jkm-checkout-captcha-for-woo'); ?></th>
+                </tr>
                 <tr valign="top" class="<?php echo (!$is_woocommerce_active ? 'jkmccfw-disabled-row' : ''); ?>">
                     <th scope="row">
-                        <?php esc_html_e('WooCommerce Checkout', 'jkm-checkout-captcha-for-woo'); ?><br/><br/>
-                        <?php esc_html_e('Checkout block (beta)', 'jkm-checkout-captcha-for-woo'); ?><br/><br/>
+                        <?php esc_html_e('Classic Checkout', 'jkm-checkout-captcha-for-woo'); ?><br/><br/>
+                        <?php esc_html_e('Block Checkout', 'jkm-checkout-captcha-for-woo'); ?><br/><br/>
                         <?php esc_html_e('Guest Checkout Only', 'jkm-checkout-captcha-for-woo'); ?>
                     </th>
                     <td>
@@ -113,6 +116,12 @@ if (!class_exists('JKMCCFW_Admin_Settings')) :
                             </span>
                         </span><br/><br/>
                         <input type="checkbox" name="jkmccfw_guest_only" <?php checked(get_option('jkmccfw_guest_only') == 'on'); ?>>
+                        <span class="jkmccfw-tooltip-wrap">
+                            <span class="dashicons dashicons-info jkmccfw-tooltip-icon" tabindex="0" aria-label="<?php esc_attr_e('Skip reCAPTCHA for logged-in users', 'jkm-checkout-captcha-for-woo'); ?>"></span>
+                            <span class="jkmccfw-tooltip-text" role="tooltip">
+                                <?php esc_html_e('Skip reCAPTCHA for logged-in users', 'jkm-checkout-captcha-for-woo'); ?>
+                            </span>
+                        </span>
                     </td>
                 </tr>
                 <tr valign="top" class="<?php echo (!$is_woocommerce_active ? 'jkmccfw-disabled-row' : ''); ?>">

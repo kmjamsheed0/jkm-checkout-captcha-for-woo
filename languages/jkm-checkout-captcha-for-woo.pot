@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-14T17:13:21+00:00\n"
+"POT-Creation-Date: 2026-09-19T10:31:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: jkm-checkout-captcha-for-woo\n"
@@ -61,121 +61,130 @@ msgstr ""
 msgid "WooCommerce Register"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:97
+#: admin/class-jkmccfw-admin-settings.php:96
 msgid "WooCommerce Checkout"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:98
-msgid "Checkout block (beta)"
+#: admin/class-jkmccfw-admin-settings.php:100
+msgid "Classic Checkout"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:99
+#: admin/class-jkmccfw-admin-settings.php:101
+msgid "Block Checkout"
+msgstr ""
+
+#: admin/class-jkmccfw-admin-settings.php:102
 msgid "Guest Checkout Only"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:105
+#: admin/class-jkmccfw-admin-settings.php:108
 msgid "Only one checkout CAPTCHA can be enabled at a time. Enable the option that matches your checkout page."
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:110
-#: admin/class-jkmccfw-admin-settings.php:112
+#: admin/class-jkmccfw-admin-settings.php:113
+#: admin/class-jkmccfw-admin-settings.php:115
 msgid "Use this only when your Checkout page uses the Checkout block. The reCAPTCHA appears just above the place order button."
 msgstr ""
 
 #: admin/class-jkmccfw-admin-settings.php:120
+#: admin/class-jkmccfw-admin-settings.php:122
+msgid "Skip reCAPTCHA for logged-in users"
+msgstr ""
+
+#: admin/class-jkmccfw-admin-settings.php:129
 msgid "CAPTCHA Position in Classic Checkout"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:125
+#: admin/class-jkmccfw-admin-settings.php:134
 msgid "Before Submit Button"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:128
+#: admin/class-jkmccfw-admin-settings.php:137
 msgid "After Submit Button"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:131
+#: admin/class-jkmccfw-admin-settings.php:140
 msgid "Before Terms and Conditions"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:134
+#: admin/class-jkmccfw-admin-settings.php:143
 msgid "Inside Terms and Conditions"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:137
+#: admin/class-jkmccfw-admin-settings.php:146
 msgid "After Terms and Conditions"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:140
+#: admin/class-jkmccfw-admin-settings.php:149
 msgid "Before Payment"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:143
+#: admin/class-jkmccfw-admin-settings.php:152
 msgid "After Payment"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:146
+#: admin/class-jkmccfw-admin-settings.php:155
 msgid "Before Billing"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:149
+#: admin/class-jkmccfw-admin-settings.php:158
 msgid "After Billing"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:152
+#: admin/class-jkmccfw-admin-settings.php:161
 msgid "Before Checkout Form"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:155
+#: admin/class-jkmccfw-admin-settings.php:164
 msgid "After Checkout Form"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:174
+#: admin/class-jkmccfw-admin-settings.php:183
 msgid "WordPress Login"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:180
+#: admin/class-jkmccfw-admin-settings.php:189
 msgid "WordPress Register"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:186
+#: admin/class-jkmccfw-admin-settings.php:195
 msgid "Reset Password"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:206
+#: admin/class-jkmccfw-admin-settings.php:215
 msgid "You can get your site key and secret from here:"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:212
+#: admin/class-jkmccfw-admin-settings.php:221
 msgid "Site Key (v2)"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:218
+#: admin/class-jkmccfw-admin-settings.php:227
 msgid "Site Secret (v2)"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:224
+#: admin/class-jkmccfw-admin-settings.php:233
 msgid "reCAPTCHA Theme"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:227
+#: admin/class-jkmccfw-admin-settings.php:236
 msgid "Light"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:228
+#: admin/class-jkmccfw-admin-settings.php:237
 msgid "Dark"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:261
+#: admin/class-jkmccfw-admin-settings.php:270
 msgid "Payment Methods to Skip"
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:262
-#: admin/class-jkmccfw-admin-settings.php:264
+#: admin/class-jkmccfw-admin-settings.php:271
+#: admin/class-jkmccfw-admin-settings.php:273
 msgid "Skip reCAPTCHA verification for the following payment methods to enhance Express Checkout compatibility."
 msgstr ""
 
-#: admin/class-jkmccfw-admin-settings.php:272
+#: admin/class-jkmccfw-admin-settings.php:281
 msgid "Select payment methods to skip reCAPTCHA verification during the checkout process."
 msgstr ""
 
